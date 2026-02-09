@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Schedule & Materials</title>
+    <style>
+        /* --- 基本設定 --- */
+        :root {
+            /* カラーパレット設定 */
+            --primary-color: #1a237e;    /* 濃紺：ヘッダーや強調文字 */
+            --accent-color: #c5cae9;     /* 薄い青紫：装飾や背景アクセント */
+            --btn-color: #304ffe;        /* 鮮やかな青：ボタン用 */
+            --btn-hover: #0026ca;        /* ボタンホバー時 */
+            --hw-bg: #fff3e0;            /* 薄いオレンジ：宿題エリア背景 */
+            --hw-border: #ff9800;        /* 宿題エリアの枠線 */
+            --text-main: #333333;        /* 本文 */
+            --bg-color: #f4f6f8;         /* ページ全体背景 */
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- ヘッダー --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        header p {
+            margin-top: 0.5rem;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        /* --- メインコンテンツ --- */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+		/* --- intruction --- */
+        .instr{
+            background: white;
+           align-items: center;     /* 上下（垂直）中央 */
+            overflow: hidden;
+           text-align: center;      /* 左右中央 */
+        }
+		
+        /* --- 授業カード --- */
+        .class-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--primary-color); /* 左側のアクセントライン */
+            transition: transform 0.2s ease;
+        }
+
+        .class-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            padding: 1.5rem 2rem 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .session-number {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .class-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 1.5rem 2rem;
+        }
+
+        /* --- 動画ボタンエリア --- */
+        .video-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-desc {
+            flex: 1;
+            margin-right: 1rem;
+            font-weight: bold;
+            color: #555;
+            min-width: 200px;
+        }
+
+        .btn-video {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--btn-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(48, 79, 254, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-video:hover {
+            background-color: var(--btn-hover);
+            box-shadow: 0 6px 8px rgba(48, 79, 254, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-video::before {
+            content: "▶";
+            margin-right: 8px;
+            font-size: 0.8em;
+        }
+
+        /* --- 宿題エリア --- */
+        .homework-section {
+            background-color: var(--hw-bg);
+            border: 1px solid #ffe0b2;
+            border-left: 4px solid var(--hw-border);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+        }
+
+        .hw-label {
+            display: block;
+            color: #ef6c00;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hw-content {
+            margin: 0;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        /* --- レスポンシブ対応 --- */
+        @media (max-width: 600px) {
+            .video-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .btn-video {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+                box-sizing: border-box;
+            }
+            .card-header, .card-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>卒業プロジェクト１／修士研究会</h1>
+        <p>慶應義塾大学SFC環境情報学部／政策・メディア研究科の山田彬尭研究会で卒論／修論を書く人たちの必須講座です。</p>
+    </header>
+
+
+<div class = "instr">
+<p>
+下記のファイルをダウンロードして使用してください。そのうえで、「第1回」の授業から視聴を開始してください。
+</p>
+<a href="https://youtu.be/3H3yE-u5htc" class="btn-video" target="_blank">教材：「卒プロの友１」</a>
+</div>
+
+    <main class="container">
+
+        <article class="class-card">
+            <div class="card-header">
+                <span class="session-number">第1回</span>
+                <h2 class="class-title">ガイダンス</h2>
+            </div>
+            <div class="card-body">
+                <div class="video-section">
+                    <p class="video-desc">ユニット１：プロジェクトのはじめ方（14:31）</p>
+                    <a href="https://youtu.be/UYwEDZVaXg0" class="btn-video" target="_blank">動画</a>
+                </div>
+                <div class="homework-section">
+                    <span class="hw-label">次回までの宿題</span>
+                    <p class="hw-content">ユニット２の課題文を読み「課題１」に取り組みなさい。その後「課題２」に取り組みなさい。</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="class-card">
+            <div class="card-header">
+                <span class="session-number">第2回</span>
+                <h2 class="class-title">研究とは何か？</h2>
+            </div>
+            <div class="card-body">
+                <div class="video-section">
+                    <p class="video-desc">ユニット２：プロジェクトをイメージする</p>
+                    <a href="https://www.youtube.com/watch?v=P8zUbS4lIzg&list=PLD7ahJyoBs1D1w8bp63aTS52xmObu-JiN" class="btn-video" target="_blank">動画１</a>
+					<a href="https://www.youtube.com/watch?v=RpiuJ_-nxCY&list=PLD7ahJyoBs1D1w8bp63aTS52xmObu-JiN&index=2" class="btn-video" target="_blank">動画２</a>
+					<a href="https://www.youtube.com/watch?v=GuRJNsM5kHQ&list=PLD7ahJyoBs1D1w8bp63aTS52xmObu-JiN&index=3" class="btn-video" target="_blank">動画３</a>
+                </div>
+                <div class="homework-section">
+                    <span class="hw-label">次回までの宿題</span>
+                    <p class="hw-content">ユニット３の課題文を読み「課題３」に取り組みなさい。</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="class-card">
+            <div class="card-header">
+                <span class="session-number">第3回</span>
+                <h2 class="class-title">先行研究のリストを作る</h2>
+            </div>
+            <div class="card-body">
+                <div class="video-section">
+                    <p class="video-desc">ユニット３：データと先行研究リスト</p>
+                    <a href="https://youtu.be/ytHKqzIIYic" class="btn-video" target="_blank">動画１</a>
+                    <a href="https://youtu.be/jPrSrENnocY" class="btn-video" target="_blank">動画２</a>
+                <div class="homework-section">
+                    <span class="hw-label">次回までの宿題</span>
+                    <p class="hw-content">
+					「課題４」に取り組みなさい。具体的には次の手順を踏んでください。
+					<ul>
+						<li>動画１、動画２で学んだことを踏まえて、自分のオリジナルな「先行研究リスト」を作りなさい。</li>
+						<li>完成したら、現時点でのリサーチクエスチョンとその先行研究リストをメールで送りなさい（件名：「【卒論】先行研究リスト（氏名）」または「【修論】先行研究リスト（氏名）」）。</li>
+						<li>メールで送る際は、教員に直近1週間で都合のつく時間帯を複数挙げ、そこでミーティングのアポイントメントを取ってください（オンライン／対面）</li>
+					</ul></p>
+                </div>
+            </div>
+        </article>
+
+        <article class="class-card">
+            <div class="card-header">
+                <span class="session-number">第４回</span>
+                <h2 class="class-title">先行研究のノートテイキングを開始する</h2>
+            </div>
+            <div class="card-body">
+                <div class="video-section">
+                    <p class="video-desc">ユニット４：卒論ノート／修論ノートを作る</p>
+                    <a href="https://youtu.be/3H3yE-u5htc" class="btn-video" target="_blank">動画</a>
+                <div class="homework-section">
+                    <span class="hw-label">次回までの宿題</span>
+                    <p class="hw-content">
+					これからみなさんには、卒プロ／修論の進捗報告会を同じ課題に取り組むメンバーと開催し、お互いにフィードバックを交わしながら自分のプロジェクトを前に進めてもらいます。決して、独りにならないように！連絡を取りながら日程を決めて、ペースメーカーにしてください。</p>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+</body>
+</html>
